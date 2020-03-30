@@ -1,0 +1,110 @@
+package herencia;
+import javax.swing.JOptionPane;
+/**
+ *
+ * @author 57311
+ */
+public class Estudiante extends Persona{
+    private String carnet;
+    private double promNotas;
+    private int numMaterias;
+    
+
+
+    public Estudiante () {
+
+    }
+    
+    public Estudiante (String nombre, String apellido, int edad, int peso, String carnet, double promNotas, int numMaterias)
+    {
+        super(nombre, apellido, edad, peso);
+        this.carnet = carnet;
+        this.promNotas = promNotas;
+        this.numMaterias = numMaterias;
+    }
+
+    public String getCarnet() {
+        return carnet;
+    }
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
+    }
+   
+    public double getPromNotas() {
+        return promNotas;
+    }
+    public void setPromNotas(double promNotas) {
+        this.promNotas = promNotas;
+    }
+    
+    public int getNumMaterias() {
+        return numMaterias;
+    }
+    public void setNumMaterias(int numMaterias) {
+        this.numMaterias = numMaterias;
+    }
+    
+    public double leerNotasEstudainte(int numMaterias) {
+        
+        int notas, acu = 0;
+        //double notas;
+        numMaterias = leerDatoTipoEntero("Digite el número de materias que ve");
+        for( int i = 0; i < numMaterias; i++){
+           notas = leerDatoTipoEntero("Ingrese la nota de cada materia");
+           acu+=notas;
+        }
+        return (acu); 
+    }
+    public double calcularPromNotas(int numMaterias) {
+       
+        double prom, acu;
+        acu = leerNotasEstudainte(numMaterias);
+        prom =  acu / numMaterias;
+        return (prom);
+    }
+    public Estudiante ingresarDatosEstudiante() {
+        Estudiante nuevoEstudiante = new Estudiante();
+        String nombre = "";
+        String apellido = "";
+        int edad = 0;
+        double peso = 0.0;
+        int numMaterias = 0;
+        //double nota = 0.0;
+        double promNotas = 0.0; 
+        String carnet = "";
+        carnet = leerDatoTipoCadena("Ingrese el número del carnet del estudiante: ");
+        nombre = leerDatoTipoCadena("Ingrese el nombre del estudiante: ");
+        apellido = leerDatoTipoCadena("Ingrese el apellido del estudiante: ");
+        edad = leerDatoTipoEntero("Ingrese la edad del estudiante: ");
+        peso = leerDatoTipoReal("Ingrese el peso del estudiante: ");
+        numMaterias = leerDatoTipoEntero("Ingrese el peso del estudiante: ");
+        //nota = leerDatoTipoReal("Ingrese notas del estudiante: ");
+        
+        promNotas = calcularPromNotas(numMaterias);
+        
+        nuevoEstudiante.setNombre(nombre);
+        nuevoEstudiante.setApellido(apellido);
+        nuevoEstudiante.setCarnet(carnet);
+        nuevoEstudiante.setEdad(edad);
+        nuevoEstudiante.setPeso(peso);
+        nuevoEstudiante.setPromNotas(promNotas);
+        return (nuevoEstudiante);
+    } 
+    public void imprimirReporteNotasEstudiante(){
+
+        imprimirDatosPersona();
+        JOptionPane.showMessageDialog(null, "El carnet del estudiante es: " + carnet);
+        JOptionPane.showMessageDialog(null, "El promedio del estudiante es: " + promNotas);
+    }
+    @Override
+    public void definirEstadoPersona (int edad){
+        String estado = "";
+        if (edad < 18){
+            estado = "Menor de edad legal";
+        }
+        else{
+            estado = "Mayor de edad legal";
+        }
+        JOptionPane.showMessageDialog(null,"La persona " + nombre + "" + apellido + " es " + estado);
+    }
+}
